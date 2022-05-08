@@ -1,0 +1,74 @@
+sg.theme("DarkAmber")
+
+#what is after KEY is variable
+layout = [[sg.Text("How long should you hold A/D?(In seconds)")],
+          [sg.InputText(key='Walk Time is')],
+          [sg.Text("Left click will detroy and let up quicky at random times as if person")],
+          [sg.Submit(), sg.Cancel()]
+]
+
+window = sg.Window('Vertical Farm Macro', layout)
+
+#event keeps track of how user itneractrs with window and layout
+#Values keeps track of what the user types in
+event, values = window.read()
+
+window.close()
+
+sg.popup('You entered', values['Walk Time is'])
+
+ran = np.random.uniform(low=0.1, high=1)
+
+print(values)
+
+walk = int(values['Walk Time is'])
+
+time.sleep(4)
+
+class wart:
+
+    def on_press(key):
+        try:
+            if key.char == 'p':
+                print('detected')
+        except:
+            pass
+
+    def hear(self):
+        while True:
+            with keyboard.Listener(
+                    on_press=on_press) as Listener:
+                Listener.start()
+                Listener.join()
+
+
+    def LeftClick(self):
+            pyautogui.mouseDown()
+
+    def move(self):
+        while True:
+            pyautogui.keyDown('d')
+            time.sleep(walk)
+            pyautogui.keyUp('d')
+
+
+            pyautogui.keyDown('a')
+            time.sleep(walk)
+            pyautogui.keyUp('a')
+
+    def __init__(self):
+        t1 = threading.Thread(target=self.LeftClick)
+        t2 = threading.Thread(target=self.move)
+        t3 = threading.Thread(target=self.hear)
+        t1.start()
+        t1.join()
+        t2.start()
+        t2.join()
+        t3.start()
+        t3.join()
+        print('starting')
+
+if __name__ == '__main__':
+    d = wart()
+    d.run()
+
